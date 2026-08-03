@@ -111,6 +111,9 @@ class Tree(Plant):
             f"Tree {self.name.capitalize()} now produces a shade of "
             f"{self.get_height()}cm long and {self.trunk_diameter}cm wide.")
 
+    def show(self) -> None:
+        super().show()
+        print(f"Trunk diameter: {self.trunk_diameter}cm")
 
 class Vegetable(Plant):
     def __init__(
@@ -144,12 +147,12 @@ if __name__ == "__main__":
     print(f"[asking the {flower.name} to bloom]")
     flower.bloom()
     flower.show_bloom()
-    print("=== Tree")
+    print("\n=== Tree")
     tree = Tree("oak", 200.0, 365, 0, 0, 5)
-    print(f"Trunk diameter: {tree.trunk_diameter}")
+    tree.show()
     print(f"[asking the {tree.name} to produce shade]")
     tree.produce_shade()
-    print("=== Vegetable")
+    print("\n=== Vegetable")
     vegetable = Vegetable("tomato", 5, 10, 2.1, 0, "April", 0)
     vegetable.show()
     days = 20
