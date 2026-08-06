@@ -9,7 +9,7 @@ class PlantError(GardenError):
 
 def water_plant(plant_name: str) -> bool:
     if plant_name != plant_name.capitalize():
-        raise PlantError(f"Invalid plant name to water: {plant_name}")
+        raise PlantError(f"Invalid ñplant name to water: {plant_name}")
     return True
 
 
