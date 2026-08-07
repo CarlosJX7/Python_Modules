@@ -1,8 +1,8 @@
-#!/usr/bin/env python3
-
 import sys
 
+
 def process_scores(scores: list[int]) -> None:
+    args_check(scores)
     total_players = len(scores)
     total_score = sum(scores)
     avg_score = total_score / total_players
@@ -17,7 +17,7 @@ def process_scores(scores: list[int]) -> None:
     print(f"Score range: {range_score}")
 
 
-def args_check(scores: list) -> None:
+def args_check(scores: list[int]) -> None:
     if len(scores) == 0:
         raise Exception(
             "No scores provided. "
@@ -32,13 +32,13 @@ if __name__ == "__main__":
     scores: list[int] = []
     i = 1
     try:
-        while(i < argv_len):
+        while (i < argv_len):
             try:
                 scores.append(int(argv[i]))
-            except ValueError as e:
+            except ValueError:
                 print(f"Invalid parameter: {argv[i]}")
             i += 1
         process_scores(scores)
         args_check(scores)
     except Exception as e:
-        print(f"eee\n {e}")
+        print(f"{e}")
