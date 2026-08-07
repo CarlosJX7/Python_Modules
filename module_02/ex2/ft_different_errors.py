@@ -1,14 +1,16 @@
-def garden_operations(operation_number: int) -> None:
+def garden_operations(operation_number: int) -> float:
+    value = 1.0
     if operation_number == 0:
         value = int("abc")
     if operation_number == 1:
         value = 1 / 0
     if operation_number == 2:
-        value = open("/non/existing/file")
+        open("/non/existent/file")
     if operation_number == 3:
-        value = "a" + 1
+        "a" + 1
     if operation_number == 4:
         value = 1 + 1
+    return value
 
 
 def test_error_types() -> None:
