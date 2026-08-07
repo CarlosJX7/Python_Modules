@@ -2,6 +2,20 @@
 
 import sys
 
+def process_scores(scores: list[int]) -> None:
+    total_players = len(scores)
+    total_score = sum(scores)
+    avg_score = total_score / total_players
+    hight_score = max(scores)
+    low_score = min(scores)
+    range_score = hight_score - low_score
+    print(f"Scores procesed: {scores}")
+    print(f"Total players: {total_players}")
+    print(f"Average score: {avg_score}")
+    print(f"Hight score: {hight_score}")
+    print(f"Low score: {low_score}")
+    print(f"Score range: {range_score}")
+
 
 def args_check(scores: list) -> None:
     if len(scores) == 0:
@@ -24,6 +38,7 @@ if __name__ == "__main__":
             except ValueError as e:
                 print(f"Invalid parameter: {argv[i]}")
             i += 1
+        process_scores(scores)
         args_check(scores)
     except Exception as e:
         print(f"eee\n {e}")
