@@ -15,6 +15,30 @@ def total_quantity(inventory: dict[str, int]) -> int:
     return total
 
 
+def get_max(inventory: dict[str, int]) -> tuple[str, int]:
+    names = list(inventory.keys())
+    max_item = names[0]
+    max_value = inventory[max_item]
+
+    for item in inventory:
+        if max_value < inventory[item]:
+            max_item = item
+            max_value = inventory[item]
+    return max_item, max_value
+
+
+def get_min(inventory: dict[str, int]) -> tuple[str, int]:
+    names = list(inventory.keys())
+    min_item = names[0]
+    min_value = inventory[min_item]
+
+    for item in inventory:
+        if min_value > inventory[item]:
+            min_item = item
+            min_value = inventory[item]
+    return min_item, min_value
+
+
 def get_percentage(quantity: int, total: int) -> float:
     return round(quantity / total * 100, 1)
 
@@ -43,3 +67,9 @@ if __name__ == "__main__":
         print(
             f"Item {item} represents "
             f"{get_percentage((inventory[item]), total_quantity(inventory))}%")
+    max_item = get_max(inventory)
+    min_item = get_min(inventory)
+    print(f"Item most abundant: {max_item[0]} with quantity {max_item[1]}")
+    print(f"Item least abundant: {min_item[0]} with quantity {min_item[1]}")
+    inventory.update({"magic_item" : 1})
+    print(f"Updated inventory: {inventory}")
