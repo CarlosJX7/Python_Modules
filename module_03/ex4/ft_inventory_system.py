@@ -71,5 +71,5 @@ if __name__ == "__main__":
     min_item = get_min(inventory)
     print(f"Item most abundant: {max_item[0]} with quantity {max_item[1]}")
     print(f"Item least abundant: {min_item[0]} with quantity {min_item[1]}")
-    inventory.update({"magic_item" : 1})
+    inventory.update({"magic_item": 1})
     print(f"Updated inventory: {inventory}")

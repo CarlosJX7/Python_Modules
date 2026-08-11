@@ -1,6 +1,7 @@
 from typing import Generator
 import random
 
+
 def gen_event() -> Generator[tuple[str, str], None, None]:
     list_name = [
         "bob",
@@ -24,7 +25,8 @@ def gen_event() -> Generator[tuple[str, str], None, None]:
         yield name, action
 
 
-def consume_event(events: list[tuple[str, str]]) -> Generator[tuple[str,str], None, None]:
+def consume_event(events: list[tuple[str, str]]) -> Generator[
+                                    tuple[str, str], None, None]:
     while events:
         event = random.choice(events)
         events.remove(event)
@@ -35,7 +37,10 @@ if __name__ == "__main__":
     generator = gen_event()
     for i in range(100):
         random_event = next(generator)
-        print(f"Event {i}: Player {random_event[0]} did action {random_event[1]}")
+        print(
+            f"Event {i}: Player {random_event[0]} "
+            f"did action {random_event[1]}"
+            )
 
     events: list[tuple[str, str]] = []
     for i in range(10):
