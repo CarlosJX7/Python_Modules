@@ -16,6 +16,7 @@ def save_text(text: str) -> None:
     except OSError as e:
         print(f"Error creating file '{file_name}': {e}")
 
+
 def format_text(text: str) -> str:
     new_text = ""
 
