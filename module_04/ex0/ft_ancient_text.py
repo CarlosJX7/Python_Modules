@@ -1,12 +1,13 @@
 import sys
 import typing
 
+
 def get_content(fd: typing.IO[str]) -> str:
     text = fd.read()
     return text
 
 
-if __name__ == "__main__":
+def data_recover() -> None:
     file = None
     try:
         file = sys.argv[1]
@@ -19,5 +20,14 @@ if __name__ == "__main__":
         print(f"\n---\nFile '{file}' closed.")
     except OSError as e:
         print(f"Error opening file '{file}': {e}")
-    except IndexError as e:
+
+
+def main() -> None:
+    if len(sys.argv) != 2:
         print("Usage: ft_ancient_text.py <file>")
+        return
+    data_recover()
+
+
+if __name__ == "__main__":
+    main()
