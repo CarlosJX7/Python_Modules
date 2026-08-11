@@ -39,10 +39,8 @@ def get_content(fd: typing.IO[str]) -> str:
 def data_recover() -> str:
     file = sys.argv[1]
     try:
-        print("=== Cyber Archives Recovery ===")
-        print(f"Accessing file '{file}'")
+        print(f"Accessing file '{file}'\n---")
         fd = open(file)
-        print("---")
         new_text = get_content(fd)
         print(new_text, end="")
         fd.close()
@@ -57,8 +55,9 @@ def main() -> None:
     if len(sys.argv) != 2:
         print("Usage: ft_ancient_text.py <file>")
         return
+    print("=== Cyber Archives Recovery & Preservation ===")
     text = data_recover()
-    print("Transform data: \n---")
+    print("\nTransform data: \n---")
     new_text = format_text(text)
     print(new_text, "\n---")
     save_text(new_text)
