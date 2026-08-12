@@ -3,7 +3,9 @@ import typing
 
 
 def save_text(text: str) -> None:
-    file_name = input("Enter new file name (or empty): ")
+    print("Enter new file name (or empty): ", end="")
+    sys.stdout.flush()
+    file_name = sys.stdin.readline().rstrip("\n")
     if file_name == "":
         print("Not saving data.")
         return
