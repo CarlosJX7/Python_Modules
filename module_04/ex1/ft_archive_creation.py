@@ -14,7 +14,7 @@ def save_text(text: str) -> None:
         new_file.close()
         print(f"Data saved in {file_name}")
     except OSError as e:
-        print(f"Error creating file '{file_name}': {e}")
+        print(f"Error opening file '{file_name}': {e}")
 
 
 def format_text(text: str) -> str:
@@ -36,7 +36,7 @@ def get_content(fd: typing.IO[str]) -> str:
     return text
 
 
-def data_recover() -> str:
+def data_recover() -> str | None:
     file = sys.argv[1]
     try:
         print(f"Accessing file '{file}'\n---")
@@ -48,7 +48,7 @@ def data_recover() -> str:
         return new_text
     except OSError as e:
         print(f"Error opening file '{file}': {e}")
-        return ""
+        return None
 
 
 def main() -> None:
@@ -57,6 +57,8 @@ def main() -> None:
         return
     print("=== Cyber Archives Recovery & Preservation ===")
     text = data_recover()
+    if text is None:
+        return
     print("\nTransform data: \n---")
     new_text = format_text(text)
     print(new_text, "\n---")
