@@ -9,15 +9,17 @@ def save_text(text: str) -> None:
     if file_name == "":
         print("Not saving data.")
         return
-    print(f"Saving data to: {file_name}")
+    print(f"Saving data to: '{file_name}'")
     try:
         new_file = open(file_name, "w")
         new_file.write(text)
         new_file.close()
         print(f"Data saved in {file_name}")
     except OSError as e:
-        sys.stderr.write(f"[STDERR] Error opening file '{file_name}':"
-                         f" {e}\n Data not saved.\n")
+        sys.stderr.write(
+                        f"[STDERR] Error opening file '{file_name}':"
+                        f" {e}\n Data not saved.\n"
+                        )
 
 
 def format_text(text: str) -> str:

@@ -1,4 +1,8 @@
-def secure_archive(filename: str, action: str, content: str = "Default") -> tuple[bool, str]:
+def secure_archive(
+                    filename: str,
+                    action: str = "r",
+                    content: str = "Default"
+                    ) -> tuple[bool, str]:
     try:
         if action == "r":
             with open(filename, "r") as file:
@@ -6,11 +10,10 @@ def secure_archive(filename: str, action: str, content: str = "Default") -> tupl
         if action == "w":
             with open(filename, "w") as file:
                 file.write(content)
-                return (True, "Content successfully written to file")
-        return (False, "Unknown action")
+                return True, "Content successfully written to file"
+        return False, "Unknown action"
     except OSError as e:
-        return (False, str(e))
-
+        return False, str(e)
 
 
 if __name__ == "__main__":
@@ -19,11 +22,15 @@ if __name__ == "__main__":
     result: tuple[bool, str] = secure_archive("/not/existing/file", "r")
     print(f'({result[0]}, "{result[1]}")')
     print("\nUsing 'secure_archive' to read from an inaccessible file:")
-    result: tuple[bool, str] = secure_archive("inaccessible", "r")
-    print(f'({result[0]}, "{result[1]}")')
+    result1: tuple[bool, str] = secure_archive("inaccessible", "r")
+    print(f'({result1[0]}, "{result1[1]}")')
     print("\nUsing 'secure_archive' to read from a regular file:")
-    result: tuple[bool, str] = secure_archive("ancient_fragment.txt", "r")
-    print(f'({result[0]}, "{result[1]}")')
+    result2: tuple[bool, str] = secure_archive("ancient_fragment.txt", "r")
+    print(f'({result2[0]}, "{result2[1]}")')
     print("\nUsing 'secure_archive' to write previous content to a new file:")
-    result: tuple[bool, str] = secure_archive("ancient_fragment.txt", "w", "Nuevo texto")
-    print(f'({result[0]}, "{result[1]}")')
+    result3: tuple[bool, str] = secure_archive(
+                                                "ancient_fragment.txt",
+                                                "w",
+                                                "Nuevo texto"
+                                                )
+    print(f'({result3[0]}, "{result3[1]}")')
