@@ -58,7 +58,7 @@ def data_recover() -> str | None:
 
 def main() -> None:
     if len(sys.argv) != 2:
-        print("Usage: ft_ancient_text.py <file>")
+        sys.stderr.write("Usage: ft_ancient_text.py <file>")
         return
     print("=== Cyber Archives Recovery & Preservation ===")
     text = data_recover()
