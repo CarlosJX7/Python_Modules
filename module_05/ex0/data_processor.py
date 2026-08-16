@@ -17,7 +17,7 @@ class DataProcessor(ABC):
 
 
     def output(self) -> tuple[int, str]:
-        output_data = self._data_list.pop()
+        output_data = self._data_list.pop(0)
         output_index = self._index
         self._index += 1
         return (output_index, output_data)
