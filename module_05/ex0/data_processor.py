@@ -38,7 +38,7 @@ class NumericProcessor(DataProcessor):
 
     def ingest(self, data: int | float | list[int | float]) -> None:
         if not self.validate(data):
-            raise ValueError("Improper data input")
+            raise ValueError("Improper numeric data")
         if not isinstance(data, list):
             data_list = [data]
         else:
@@ -61,7 +61,7 @@ class TextProcessor(DataProcessor):
 
     def ingest(self, data: str | list[str]) -> None:
         if not self.validate(data):
-            raise ValueError("Improper data input")
+            raise ValueError("Improper text data")
 
         if not isinstance(data, list):
             data_list = [data]
@@ -86,14 +86,12 @@ class LogProcessor(DataProcessor):
                     return False
             return True
 
-        if not isinstance(data, dict):
-            return False
+        return validate_dict(data)
 
-        return True
 
     def ingest(self, data: dict[str, str] | list[dict[str, str]]) -> None:
         if not self.validate(data):
-            raise ValueError("Improper data input")
+            raise ValueError("Improper log data")
 
         if not isinstance(data, list):
             list_data = [data]
@@ -101,8 +99,8 @@ class LogProcessor(DataProcessor):
             list_data = data
 
         for element in list_data:
-            level = element.get("log_level", "default_level")
-            message = element.get("log_message", "default_message")
+            level = element.get("log_level", "")
+            message = element.get("log_message", "")
             self._data_list.append(f"{level}: {message}")
 
 
@@ -111,7 +109,7 @@ def test_log() -> None:
     data_list = ["Hello", [{"log_level": "NOTICE", "log_message": "Connection to server"},
                         {"log_level": "ERROR", "log_message": "Unauthorized access!!"}]]
     processor = LogProcessor()
-    print(f"Trying to validate input '{data_list[0]}: '"
+    print(f"Trying to validate input '{data_list[0]}': "
         f"{processor.validate(data_list[0])}")
     print(f"Processing data: {data_list[1]}")
     processor.ingest(data_list[1])
