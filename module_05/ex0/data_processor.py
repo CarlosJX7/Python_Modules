@@ -88,7 +88,6 @@ class LogProcessor(DataProcessor):
 
         return validate_dict(data)
 
-
     def ingest(self, data: dict[str, str] | list[dict[str, str]]) -> None:
         if not self.validate(data):
             raise ValueError("Improper log data")
@@ -106,13 +105,24 @@ class LogProcessor(DataProcessor):
 
 def test_log() -> None:
     print("\nTesting Log Processor...")
-    data_list = ["Hello", [{"log_level": "NOTICE", "log_message": "Connection to server"},
-                        {"log_level": "ERROR", "log_message": "Unauthorized access!!"}]]
+    invalid_data = "Hello"
+    data_list = [
+            {
+                "log_level": "NOTICE",
+                "log_message": "Connection to server"
+            },
+            {
+                "log_level": "ERROR",
+                "log_message": "Unauthorized access!!"
+            }
+        ]
     processor = LogProcessor()
-    print(f"Trying to validate input '{data_list[0]}': "
-        f"{processor.validate(data_list[0])}")
-    print(f"Processing data: {data_list[1]}")
-    processor.ingest(data_list[1])
+    print(
+        f"Trying to validate input '{invalid_data}': "
+        f"{processor.validate(invalid_data)}"
+        )
+    print(f"Processing data: {data_list}")
+    processor.ingest(data_list)
     size = 2
     print(f"Extracting {size} values...")
     for i in range(size):
@@ -127,12 +137,15 @@ def test_log() -> None:
 
 def test_text() -> None:
     print("\nTesting Text Processor...")
-    data_list = [42, ["Hello", "Nexus", "World"]]
+    invalid_data = 42
+    data_list = ["Hello", "Nexus", "World"]
     processor = TextProcessor()
-    print(f"Trying to validate input '{data_list[0]}':"
-        f"{processor.validate(data_list[0])}")
-    print(f"Processing data: {data_list[-1]}")
-    processor.ingest(data_list[-1])
+    print(
+        f"Trying to validate input '{invalid_data}':"
+        f"{processor.validate(invalid_data)}"
+        )
+    print(f"Processing data: {data_list}")
+    processor.ingest(data_list)
     size = 1
     print(f"Extracting {size} value...")
     for i in range(size):
@@ -144,21 +157,26 @@ def test_text() -> None:
         else:
             print(f"Text value {extracted[0]}: {extracted[1]}")
 
+
 def test_numeric() -> None:
     print("Testing numeric processor...")
-    data_list = [42, "Hello", "foo", [1, 2, 3, 4, 5]]
+    invalid_data = [42, "Hello", "foo"]
+    data_list: list[int | float] = [1, 2, 3, 4, 5]
     processor = NumericProcessor()
-    for data in data_list[:2]:
+    for data in invalid_data[:2]:
         print(f"Trying to validate '{data}': {processor.validate(data)}")
-    print(f"Test invalid ingestion of string '{data_list[2]}' without prior validation:")
+    print(
+        f"Test invalid ingestion of string '{invalid_data[-1]}' "
+        f"without prior validation:"
+        )
     try:
-        processor.ingest(data_list[2])
+        processor.ingest(invalid_data[-1])
     except ValueError as e:
         print(f"Got exception: {e}")
 
-    print(f"Processing data: {data_list[-1]}")
-    processor.validate(data_list[-1])
-    processor.ingest(data_list[-1])
+    print(f"Processing data: {data_list}")
+    processor.validate(data_list)
+    processor.ingest(data_list)
     size = 3
     print(f"Extracting {size} values...")
     for i in range(0, size):
