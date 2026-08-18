@@ -156,8 +156,8 @@ class DataStream:
             raise ValueError("invalid data stream input")
         self._processor_list.append(proc)
 
-    def process_stream(self, stream: list[typing.Any]) -> None:
-        def find_process(element: list[typing.Any]) -> bool:
+    def process_stream(self, stream: list[Any]) -> None:
+        def find_process(element: list[Any]) -> bool:
             for proc in self._processor_list:
                 if proc.validate(element):
                     proc.ingest(element)
@@ -181,13 +181,13 @@ class DataStream:
                 )
 
     def output_pipeline(self, nb: int, plugin: ExportPlugin) -> None:
-        """"Consume up to nb items per processor
+        """Consume up to nb items per processor
         and send each batch to plugin."""
         if not nb:
             return
 
-        output_list: list[tuple[int, str]] = []
         for proc in self._processor_list:
+            output_list: list[tuple[int, str]] = []
             for _ in range(nb):
                 try:
                     output_list.append(proc.output())
@@ -200,8 +200,10 @@ if __name__ == "__main__":
     print("=== Code Nexus - Data Pipeline ===")
     print("Initialize Data Stream...")
     data_stream = DataStream()
+
     print("== DataStream statistics ==")
     data_stream.print_processors_stats()
+
     print("Registering Processors")
     numeric_proc = NumericProcessor()
     text_proc = TextProcessor()
@@ -209,6 +211,7 @@ if __name__ == "__main__":
     data_stream.register_processor(numeric_proc)
     data_stream.register_processor(text_proc)
     data_stream.register_processor(log_proc)
+
     batch1 = [
         "Hello world",
         [3.14, -1, 2.71],
@@ -258,6 +261,7 @@ if __name__ == "__main__":
 
     print(f"Send another batch of data: {batch2}")
     data_stream.process_stream(batch2)
+
     print("== DataStream statistics ==")
     data_stream.print_processors_stats()
 
