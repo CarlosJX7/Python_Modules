@@ -1,12 +1,14 @@
 from abc import ABC
 from abc import abstractmethod
+
+
 class Creature(ABC):
     def __init__(self, name: str, type: str) -> None:
         self.name: str = name
         self.type: str = type
 
     @abstractmethod
-    def attack() -> str:
+    def attack(self) -> str:
         pass
 
     def describe(self) -> str:
@@ -24,7 +26,7 @@ class Flameling(Creature):
 class Pyrodon(Creature):
     def __init__(self) -> None:
         super().__init__("Pyrodon", "Fire/Flying")
-        
+
     def attack(self) -> str:
         return "Pyrodon uses Flamethrower!"
 

@@ -1,5 +1,5 @@
-from ex2.strategies import NormalStrategy, AggressiveStrategy, DefensiveStrategy
-from ex0.creature import Creature
+from ex2.strategies import NormalStrategy
+from ex2.strategies import AggressiveStrategy, DefensiveStrategy
 import ex1
 import ex0
 
@@ -8,7 +8,7 @@ crature = factory.create_base()
 strat = NormalStrategy()
 strat.act(crature)
 print("re")
-factory_tr = ex1.TransformCreatureFactory() 
+factory_tr = ex1.TransformCreatureFactory()
 creature_ag = factory_tr.create_base()
 strat = AggressiveStrategy()
 strat.act(creature_ag)

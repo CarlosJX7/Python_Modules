@@ -23,10 +23,10 @@ def test_factory(factory: CreatureFactory) -> None:
     base = factory.create_base()
     evolved = factory.create_evolved()
 
-    print(base.describe())  
+    print(base.describe())
     print(base.attack())
 
-    print(evolved.describe())  
+    print(evolved.describe())
     print(evolved.attack(), end="\n\n")
 
 
