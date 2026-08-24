@@ -3,6 +3,7 @@ from ex0.creature_factory import CreatureFactory
 
 def transform_test(factory: CreatureFactory) -> None:
     print("\nTesting Creature with transform capability")
+    print("base:")
     creature = factory.create_base()
     print(creature.describe())
     print(creature.attack())
@@ -21,6 +22,7 @@ def transform_test(factory: CreatureFactory) -> None:
 
 def healing_test(factory: CreatureFactory) -> None:
     print("Testing Creature with healing capability")
+    print("base:")
 
     creature = factory.create_base()
     print(creature.describe())

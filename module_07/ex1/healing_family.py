@@ -21,7 +21,7 @@ class Bloomelle(Creature, HealCapability):
         return f"{self.name} uses Petal Dance!" 
 
     def heal(self) -> str:
-        return f"{self.name}   heals itself and others for a large amount"
+        return f"{self.name} heals itself and others for a large amount"
 
 class HealingCreatureFactory(CreatureFactory):
     def create_base(self) -> Creature:
