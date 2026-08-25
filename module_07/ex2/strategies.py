@@ -37,7 +37,7 @@ class AggressiveStrategy(BattleStrategy):
         if not self.is_valid(creature):
             raise InvalidStrategyError(
                                         f"Invalid Creature '{creature.name}' "
-                                        f"for this aggresive strategy"
+                                        f"for this aggressive strategy"
                                         )
         print(cast(TransformCapability, creature).transform())
         print(creature.attack())
@@ -61,5 +61,5 @@ class DefensiveStrategy(BattleStrategy):
 
 
 class InvalidStrategyError(Exception):
-    def __init__(self, msg) -> None:
+    def __init__(self, msg: str) -> None:
         super().__init__(msg)
