@@ -9,4 +9,4 @@ def validate_ingredients(ingredients: str) -> str:
     ingredients_list = [ing.strip() for ing in ingredients_list]
     valid = any(item in allowed for item in ingredients_list)
     status = "VALID" if valid else "INVALID"
-    return f"{ingredients}- {status}"
+    return f"{ingredients} - {status}"
