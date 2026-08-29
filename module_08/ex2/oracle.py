@@ -2,7 +2,7 @@ import os
 import sys
 
 
-# Variables requeridas por el subject
+# Required configuration variables
 CONFIG_VARS: list[dict[str, str]] = [
     {
         "name": "MATRIX_MODE",
@@ -57,7 +57,7 @@ def load_configuration() -> dict[str, str]:
 
 
 def format_value(name: str, value: str, mode: str) -> str:
-    """Devuelve el texto a mostrar según el estado de la variable."""
+    """Returns the display text based on the variable state."""
     if not value:
         return "[NOT CONFIGURED]"
 
@@ -74,7 +74,7 @@ def format_value(name: str, value: str, mode: str) -> str:
 
 
 def display_config(config: dict[str, str]) -> None:
-    """Muestra la configuración recorriendo directamente display_names."""
+    """Displays configuration by iterating over display_names."""
     mode: str = config.get("MATRIX_MODE", "development")
 
     print("ORACLE STATUS: Reading the Matrix...")
@@ -95,7 +95,7 @@ def display_config(config: dict[str, str]) -> None:
 
 
 def run_security_check() -> None:
-    """Verifica buenas prácticas de seguridad iterando sobre una lista de comprobaciones."""
+    """Checks security best practices by iterating over a list of checks."""
     print("Environment security check:")
 
     checks: list[tuple[str, bool]] = [
@@ -110,7 +110,7 @@ def run_security_check() -> None:
 
 
 def main() -> None:
-    """Punto de entrada principal"""
+    """Main entry point."""
     if not check_dotenv():
         print("ERROR: python-dotenv is not installed!")
         print()
