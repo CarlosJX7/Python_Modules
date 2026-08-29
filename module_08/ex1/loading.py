@@ -1,6 +1,6 @@
 import sys
 from importlib.metadata import version, PackageNotFoundError
-from typing import Any, Tuple
+from typing import Any
 
 
 def check_dependencies() -> bool:
@@ -32,7 +32,8 @@ def check_dependencies() -> bool:
         check = False
 
     if not check:
-        sys.stderr.write("\nMissing dependencies detected!\n")
+        print("")
+        sys.stderr.write("Missing dependencies detected!\n")
         sys.stderr.write("Please install required packages using pip or Poetry:\n")
         sys.stderr.write("  pip:    pip install -r requirements.txt\n")
         sys.stderr.write("  poetry: poetry install\n")
@@ -41,8 +42,8 @@ def check_dependencies() -> bool:
     return check
 
 
-def data_generation() -> Tuple[Any, Any]:
-    """Synthetic data generation."""
+def data_generation() -> Any:
+    """Synthetic data generation using numpy and pandas."""
     import numpy as np
     import pandas as pd
 
@@ -50,15 +51,11 @@ def data_generation() -> Tuple[Any, Any]:
     print("Processing 1000 data points...")
 
     rng = np.random.default_rng(42)
-    data = rng.normal(loc=0.0, scale=1.0, size=1000)
+    raw_data: np.ndarray = rng.normal(loc=0.0, scale=1.0, size=1000)
 
-    df = pd.DataFrame({
-        "timestamp": range(1000),
-        "signal_strength": data,
-        "anomaly_score": np.abs(data)
-    })
+    df: pd.DataFrame = pd.DataFrame({"data": raw_data})
 
-    return df, data
+    return df["data"]
 
 
 def image_generation(data: Any) -> None:
@@ -79,10 +76,13 @@ def image_generation(data: Any) -> None:
     print("Results saved to: matrix_analysis.png")
 
 
-if __name__ == "__main__":
+def main() -> None:
     if not check_dependencies():
         sys.exit(1)
 
-    df, data = data_generation()
+    data = data_generation()
     image_generation(data)
 
+
+if __name__ == "__main__":
+    main()
