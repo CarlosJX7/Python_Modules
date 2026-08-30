@@ -89,21 +89,34 @@ Welcome to the **Python Modules** repository. This project is a comprehensive co
 - **Transmutation Scripts**: `ft_transmutation_0.py`, `ft_transmutation_1.py`, `ft_transmutation_2.py`
 
 ### Module 07: Advanced OOP and Battle System
-**Description:** Applies advanced OOP concepts through the creation of a complex battle simulation.  
-**What you learn:** Inheritance, polymorphism, factories, composition, strategy patterns, and designing complex object hierarchies.  
-**Utility:** Builds architectural thinking skills, required for designing scalable applications like video games, UI frameworks, or large backend services.
+**Description:** Applies advanced OOP concepts through the creation of a modular battle and tournament simulation.  
+**What you learn:** Abstract base classes, inheritance, polymorphism, factory design pattern, composition, capability mixins/interfaces, and strategy patterns for dynamic behaviors and combat rules.  
+**Utility:** Builds architectural thinking skills required for designing scalable, maintainable systems such as game engines, simulation tools, UI frameworks, or backend business logic.
 
-- `battle.py`, `capacitor.py`, `tournament.py`
-- `ex0`: Creature definitions and factories (`aqua_family.py`, `flame_family.py`, `creature.py`, `creature_factory.py`)
-- `ex1`: Capabilities and transformations (`capabilities.py`, `healing_family.py`, `transform_family.py`)
-- `ex2`: Strategies (`strategies.py`)
+- **Simulation Runners**:
+  - `battle.py`: Basic battle and creature factory demonstration (`FlameFactory`, `AquaFactory`).
+  - `capacitor.py`: Capability and evolution tests (healing and transformation mechanics).
+  - `tournament.py`: Strategy-driven tournament engine with error handling for invalid moves.
+- **Packages & Modules**:
+  - `ex0`: Base creature hierarchy and abstract creature factories (`creature.py`, `creature_factory.py`, `aqua_family.py`, `flame_family.py`).
+  - `ex1`: Capability interfaces, healing capabilities, and dynamic transformation behaviors (`capabilities.py`, `healing_family.py`, `transform_family.py`).
+  - `ex2`: Pluggable battle strategies (normal, aggressive, defensive) and custom strategy error handling (`strategies.py`).
+
+### Module 08: Environments, Packages, and Configuration (Matrix Theme)
+**Description:** Focuses on Python development environments, dependency management, package managers, and secure configuration handling using a Matrix-inspired theme.  
+**What you learn:** Virtual environment detection and isolation (`sys.prefix`, `site`), dependency declaration and management (`requirements.txt`, `pyproject.toml` with Poetry), third-party data processing & visualization libraries (`pandas`, `numpy`, `matplotlib`), and secure environment variable handling with `python-dotenv`.  
+**Utility:** Fundamental for professional software development, reproducibility across machines, securing sensitive credentials, and cleanly managing project dependencies.
+
+- `ex0`: `construct.py` - Virtual environment detector and isolation validator.
+- `ex1`: `loading.py`, `requirements.txt`, `pyproject.toml` - Runtime dependency inspection, synthetic data generation with NumPy/Pandas, and histogram plotting with Matplotlib (`matrix_analysis.png`).
+- `ex2`: `oracle.py`, `.env.example`, `.gitignore`, `requirements.txt` - Environment configuration loader (`python-dotenv`), sensitive value masking, and environment security validation.
 
 ## 🚀 Getting Started
 
 Clone the repository and explore each module's directory. Each module contains specific exercises that build upon each other.
 
 ```bash
-git clone https://github.com/your-username/Python_Modules.git
+git clone https://github.com/CarlosJX7/Python_Modules.git
 cd Python_Modules
 ```
 
