@@ -1,5 +1,6 @@
 # Environment variables — NEVER commit real secrets!
 .env
+# Also add the venv we are creating
 
 # Python cache
 __pycache__/
