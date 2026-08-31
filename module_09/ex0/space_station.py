@@ -49,7 +49,8 @@ def main() -> None:
             last_maintenance="2024-01-15T10:00:00",
         )
     except ValidationError as e:
-        print(e.errors()[0].get("msg"))
+        msg = e.errors()[0].get("msg", "")
+        print(msg.removeprefix("Value error, "))
 
 
 if __name__ == "__main__":
