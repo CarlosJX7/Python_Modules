@@ -36,7 +36,7 @@ def main() -> None:
     print(f"Oxygen: {valid_station.oxygen_level}%")
     status = "Operational" if valid_station.is_operational else "Not Operational"
     print(f"Status: {status}")
-    print("=" * 40)
+    print("========================================")
 
     print("Expected validation error:")
     try:
@@ -49,7 +49,7 @@ def main() -> None:
             last_maintenance="2024-01-15T10:00:00",
         )
     except ValidationError as e:
-        print(e.errors()[0]["msg"])
+        print(e.errors()[0].get("msg"))
 
 
 if __name__ == "__main__":
