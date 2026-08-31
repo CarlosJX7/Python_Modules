@@ -1,13 +1,15 @@
 import os
-import sys
 import site
+import sys
 
 
 def inside_env() -> bool:
+    """Check if python is running inside a virtual environment."""
     return sys.prefix != getattr(sys, "base_prefix", sys.prefix)
 
 
-if __name__ == "__main__":
+def main() -> None:
+    """Display environment status and matrix instructions."""
     if not inside_env():
         print("MATRIX STATUS: You're still plugged in")
         print(f"Current Python: {sys.executable}")
@@ -30,3 +32,7 @@ if __name__ == "__main__":
         print("the global system.")
         print("Package installation path:")
         print(site.getsitepackages()[0])
+
+
+if __name__ == "__main__":
+    main()

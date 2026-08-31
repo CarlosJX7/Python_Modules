@@ -1,8 +1,6 @@
 import os
 import sys
 
-
-# Required configuration variables
 CONFIG_VARS: list[dict[str, str]] = [
     {
         "name": "MATRIX_MODE",
@@ -33,9 +31,10 @@ CONFIG_VARS: list[dict[str, str]] = [
 
 
 def check_dotenv() -> bool:
-    """Checking dot env library installed"""
+    """Check if python-dotenv module is installed."""
     try:
         import importlib
+
         importlib.import_module("dotenv")
         return True
     except ImportError:
@@ -43,9 +42,14 @@ def check_dotenv() -> bool:
 
 
 def load_configuration() -> dict[str, str]:
-    from dotenv import load_dotenv
+    """Load environment variables using python-dotenv."""
+    from dotenv import find_dotenv, load_dotenv
 
-    load_dotenv()
+    dotenv_path = find_dotenv()
+    if dotenv_path:
+        load_dotenv(dotenv_path)
+    else:
+        load_dotenv()
 
     config_dict: dict[str, str] = {}
 
@@ -57,7 +61,7 @@ def load_configuration() -> dict[str, str]:
 
 
 def format_value(name: str, value: str, mode: str) -> str:
-    """Returns the display text based on the variable state."""
+    """Return display text based on variable state."""
     if not value:
         return "[NOT CONFIGURED]"
 
@@ -65,8 +69,10 @@ def format_value(name: str, value: str, mode: str) -> str:
         if mode == "production":
             return "Connected to production database"
         return "Connected to local instance"
+
     if name == "API_KEY":
         return "Authenticated"
+
     if name == "ZION_ENDPOINT":
         return "Online"
 
@@ -74,7 +80,7 @@ def format_value(name: str, value: str, mode: str) -> str:
 
 
 def display_config(config: dict[str, str]) -> None:
-    """Displays configuration by iterating over display_names."""
+    """Display system configuration."""
     mode: str = config.get("MATRIX_MODE", "development")
 
     print("ORACLE STATUS: Reading the Matrix...")
@@ -95,12 +101,16 @@ def display_config(config: dict[str, str]) -> None:
 
 
 def run_security_check() -> None:
-    """Checks security best practices by iterating over a list of checks."""
+    """Check security best practices."""
+    from dotenv import find_dotenv
+
     print("Environment security check:")
+
+    has_env = bool(find_dotenv())
 
     checks: list[tuple[str, bool]] = [
         ("No hardcoded secrets detected", True),
-        (".env file properly configured", os.path.isfile(".env")),
+        (".env file properly configured", has_env),
         ("Production overrides available", True),
     ]
 
@@ -113,7 +123,7 @@ def main() -> None:
     """Main entry point."""
     if not check_dotenv():
         print("ERROR: python-dotenv is not installed!")
-        print()
+        print("")
         print("Install it with:")
         print("  pip install python-dotenv")
         print("  # or: pip install -r requirements.txt")
@@ -122,7 +132,6 @@ def main() -> None:
     config: dict[str, str] = load_configuration()
 
     display_config(config)
-
     run_security_check()
 
     print("\nThe Oracle sees all configurations.")

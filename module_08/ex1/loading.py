@@ -1,5 +1,5 @@
 import sys
-from importlib.metadata import version, PackageNotFoundError
+from importlib.metadata import PackageNotFoundError, version
 from typing import Any
 
 
@@ -34,7 +34,9 @@ def check_dependencies() -> bool:
     if not check:
         print("")
         sys.stderr.write("Missing dependencies detected!\n")
-        sys.stderr.write("Please install required packages using pip or Poetry:\n")
+        sys.stderr.write(
+            "Please install required packages using pip or Poetry:\n"
+        )
         sys.stderr.write("  pip:    pip install -r requirements.txt\n")
         sys.stderr.write("  poetry: poetry install\n")
         sys.exit(1)
@@ -45,13 +47,13 @@ def check_dependencies() -> bool:
 def data_generation() -> Any:
     """Synthetic data generation using numpy and pandas."""
     import numpy as np
-    import pandas as pd
+    import pandas as pd  # type: ignore[import-untyped]
 
     print("\nAnalyzing Matrix data...")
     print("Processing 1000 data points...")
 
     rng = np.random.default_rng(42)
-    raw_data: np.ndarray = rng.normal(loc=0.0, scale=1.0, size=1000)
+    raw_data: np.ndarray[Any, Any] = rng.normal(loc=0.0, scale=1.0, size=1000)
 
     df: pd.DataFrame = pd.DataFrame({"data": raw_data})
 

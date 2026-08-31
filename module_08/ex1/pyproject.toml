@@ -1,16 +1,15 @@
-[tool.poetry]
+[project]
 name = "ex1"
 version = "1.0.0"
 description = "Matrix data analysis"
-authors = ["carlinaq"]
-package-mode = false
-
-[tool.poetry.dependencies]
-python = "^3.10"
-pandas = "^2.0"
-numpy = "^1.24"
-matplotlib = "^3.7"
+authors = [{name = "carlinaq"}]
+requires-python = ">=3.10"
+dependencies = [
+    "pandas>=2.0",
+    "numpy>=1.24",
+    "matplotlib>=3.7",
+]
 
 [build-system]
-requires = ["poetry-core"]
+requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
