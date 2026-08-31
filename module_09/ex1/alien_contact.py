@@ -9,7 +9,7 @@ class ContactType(str, Enum):
     RADIO = "radio"
     VISUAL = "visual"
     PHYSICAL = "physical"
-    TELEPATHIC = "telepathic"
+    TELEPAT = "telepathic"
 
 
 class AlienContact(BaseModel):
@@ -29,10 +29,14 @@ class AlienContact(BaseModel):
             raise ValueError('Contact ID must start with "AC"')
         if self.contact_type == ContactType.PHYSICAL and not self.is_verified:
             raise ValueError("Physical contact reports must be verified")
-        if self.contact_type == ContactType.TELEPATHIC and self.witness_count < 3:
-            raise ValueError("Telepathic contact requires at least 3 witnesses")
+        if self.contact_type == ContactType.TELEPAT and self.witness_count < 3:
+            raise ValueError(
+                "Telepathic contact requires at least"
+                " 3 witnesses")
         if self.signal_strength > 7.0 and self.message_received is None:
-            raise ValueError("Strong signals (> 7.0) should include received messages")
+            raise ValueError(
+                "Strong signals (> 7.0)"
+                " should include received messages")
         return self
 
 
@@ -42,7 +46,7 @@ def main() -> None:
 
     valid_contact = AlienContact(
         contact_id="AC_2024_001",
-        timestamp="2024-06-15T03:22:00",
+        timestamp=datetime(2024, 6, 15, 3, 22, 0),
         location="Area 51, Nevada",
         contact_type=ContactType.RADIO,
         signal_strength=8.5,
@@ -66,9 +70,9 @@ def main() -> None:
     try:
         AlienContact(
             contact_id="AC_2024_002",
-            timestamp="2024-06-15T04:00:00",
+            timestamp=datetime(2024, 6, 15, 4, 0, 0),
             location="Roswell, NM",
-            contact_type=ContactType.TELEPATHIC,
+            contact_type=ContactType.TELEPAT,
             signal_strength=6.0,
             duration_minutes=20,
             witness_count=2,

@@ -4,11 +4,12 @@ from pydantic import BaseModel, Field, ValidationError, model_validator
 
 
 class Rank(str, Enum):
-    CADET      = "cadet"
-    OFFICER    = "officer"
+    CADET = "cadet"
+    OFFICER = "officer"
     LIEUTENANT = "lieutenant"
-    CAPTAIN    = "captain"
-    COMMANDER  = "commander"
+    CAPTAIN = "captain"
+    COMMANDER = "commander"
+
 
 class CrewMember(BaseModel):
     member_id: str = Field(..., min_length=3, max_length=10)
@@ -40,7 +41,9 @@ class SpaceMission(BaseModel):
             if member.rank == Rank.COMMANDER or member.rank == Rank.CAPTAIN:
                 valid_member += 1
         if valid_member == 0:
-            raise ValueError("Mission must have at least one Commander or Captain")
+            raise ValueError(
+                "Mission must have at least one "
+                "Commander or Captain")
 
         if self.duration_days > 365:
             experienced_member = 0
@@ -49,7 +52,8 @@ class SpaceMission(BaseModel):
                     experienced_member += 1
             if experienced_member < len(self.crew) / 2:
                 raise ValueError(
-                    "Long missions (> 365 days) need 50% experienced crew (5+ years)"
+                    "Long missions (> 365 days) need 50% "
+                    "experienced crew (5+ years)"
                 )
 
         for member in self.crew:
@@ -62,7 +66,7 @@ class SpaceMission(BaseModel):
 def main() -> None:
     """Demostración de misión válida e inválida."""
     print("Space Mission Crew Validation")
-    print("=" * 41)
+    print(("======================================"))
 
     crew = [
         CrewMember(
@@ -71,7 +75,7 @@ def main() -> None:
             rank=Rank.COMMANDER,
             age=38,
             specialization="Mission Command",
-            years_experience=15,   # >= 5 ✓
+            years_experience=15,
             is_active=True,
         ),
         CrewMember(
@@ -80,7 +84,7 @@ def main() -> None:
             rank=Rank.LIEUTENANT,
             age=30,
             specialization="Navigation",
-            years_experience=8,    # >= 5 ✓ (2/3 = 66% >= 50%)
+            years_experience=8,
             is_active=True,
         ),
         CrewMember(
@@ -89,8 +93,7 @@ def main() -> None:
             rank=Rank.OFFICER,
             age=25,
             specialization="Engineering",
-            years_experience=3,    # < 5 (pero 2/3 ya cubren el 50%)
-            is_active=True,
+            years_experience=3,
         ),
     ]
 
@@ -98,7 +101,7 @@ def main() -> None:
         mission_id="M2024_MARS",
         mission_name="Mars Colony Establishment",
         destination="Mars",
-        launch_date="2024-06-01T08:00:00",
+        launch_date=datetime(2024, 6, 1, 8, 0, 0),
         duration_days=900,
         crew=crew,
         mission_status="planned",
@@ -114,23 +117,24 @@ def main() -> None:
     print(f"Crew size: {len(valid_mission.crew)}")
     print("Crew members:")
     for member in valid_mission.crew:
-        print(f"- {member.name} ({member.rank.value}) - {member.specialization}")
-    print("=" * 41)
+        print(
+            f"- {member.name} ({member.rank.value})"
+            f" - {member.specialization}")
+    print(("======================================"))
 
-    # Caso inválido: sin commander ni captain
     print("Expected validation error:")
     try:
         SpaceMission(
             mission_id="M2024_BAD",
             mission_name="Bad Mission",
             destination="Venus",
-            launch_date="2024-06-01T08:00:00",
+            launch_date=datetime(2024, 6, 1, 8, 0, 0),
             duration_days=100,
             crew=[
                 CrewMember(
                     member_id="CM010",
                     name="Bob Jones",
-                    rank=Rank.OFFICER,    # ni commander ni captain → falla regla 2
+                    rank=Rank.OFFICER,
                     age=28,
                     specialization="Science",
                     years_experience=4,
