@@ -1,5 +1,3 @@
-from lambda_spells import FuncMageDataGenerator
-
 def artifact_sorter(
         artifacts: list[dict[str, str | int]]
         ) -> list[dict[str, str | int]]:
@@ -22,18 +20,20 @@ def mage_stats(mages: list[dict]) -> dict:
 
 
 if __name__ == "__main__":
-    artifacts = [{'name': 'Crystal Orb', 'power': 117, 'type': 'armor'}, {'name': 'Water Chalice', 'power': 89, 'type': 'relic'}, {'name': 'Lightning Rod', 'power': 104, 'type': 'focus'}, {'name': 'Wind Cloak', 'power': 67, 'type': 'weapon'}]
+    from data_generator import FuncMageDataGenerator
+    artifacts = FuncMageDataGenerator.generate_artifacts(4)
+    s_artifacts = artifact_sorter(artifacts)
+    print("===== Sorting artifacts ======")
+    print("BEFORE:")
+    for a in artifacts:
+        print(f"{a['name']: <15} | {a['power']}")
+    print("\nAFTER:")
+    for a in s_artifacts:
+        print(f"{a['name']: <15} | {a['power']}")
+    print("\n===== Filtering mages =====")
+    mages = FuncMageDataGenerator.generate_mages(4)
+    f_mages = power_filter(mages, 100)
+    for m in f_mages:
+        print(f"{m['name']: <15} | {m['power']}")
 
-    spells = [
-        "fuego",
-        "hielo",
-        "agua"
-    ]
-    nueva_lista = artifact_sorter(artifacts)
-    print(nueva_lista)
-    generator = FuncMageDataGenerator
-    #magos_power = power_filter(artifacts, 3)
-    #print(magos_power)
-    #print(spell_transformer(spells))
-    #print(mage_stats(artifacts))
 
