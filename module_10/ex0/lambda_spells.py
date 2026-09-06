@@ -1,3 +1,6 @@
+from typing import Any
+
+
 def artifact_sorter(
         artifacts: list[dict[str, str | int]]
         ) -> list[dict[str, str | int]]:
@@ -35,5 +38,3 @@ if __name__ == "__main__":
     f_mages = power_filter(mages, 100)
     for m in f_mages:
         print(f"{m['name']: <15} | {m['power']}")
-
-
