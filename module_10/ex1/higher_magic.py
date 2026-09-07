@@ -1,5 +1,4 @@
 from collections.abc import Callable
-import random
 
 
 def fireball(target: str, power: int) -> str:
@@ -16,7 +15,10 @@ def valid_power(power: int) -> bool:
     return False
 
 
-def spell_combiner(spell1: Callable[[str, int], str], spell2: Callable[[str, int], str]) -> Callable[[str, int], tuple[str, str]]:
+def spell_combiner(
+        spell1: Callable[[str, int], str],
+        spell2: Callable[[str, int], str]
+        ) -> Callable[[str, int], tuple[str, str]]:
     def combiner(target: str, power: int) -> tuple[str, str]:
         first_spell = spell1(target, power)
         second_spell = spell2(target, power)
@@ -24,14 +26,20 @@ def spell_combiner(spell1: Callable[[str, int], str], spell2: Callable[[str, int
     return combiner
 
 
-def power_amplifier(base_spell: Callable[[str, int], str], multiplier: int) -> Callable[[str, int], str]:
+def power_amplifier(
+        base_spell: Callable[[str, int], str],
+        multiplier: int
+        ) -> Callable[[str, int], str]:
     def amplified(target: str, power: int) -> str:
         power = power * multiplier
         return base_spell(target, power)
     return amplified
 
 
-def conditional_caster(condition: Callable[[int], bool], spell: Callable[[str, int], str]) -> Callable[[str, int], str]:
+def conditional_caster(
+        condition: Callable[[int], bool],
+        spell: Callable[[str, int], str]
+        ) -> Callable[[str, int], str]:
     def conditional(target: str, power: int) -> str:
         status = condition(power)
         if status:
@@ -41,7 +49,9 @@ def conditional_caster(condition: Callable[[int], bool], spell: Callable[[str, i
     return conditional
 
 
-def spell_sequence(spells: list[Callable[[str, int], str]]) -> Callable[[str, int], list[str]]:
+def spell_sequence(
+        spells: list[Callable[[str, int], str]]
+        ) -> Callable[[str, int], list[str]]:
     def sequence(target: str, power: int) -> list[str]:
         spell_list = []
         for spell in spells:
@@ -51,8 +61,6 @@ def spell_sequence(spells: list[Callable[[str, int], str]]) -> Callable[[str, in
 
 
 if __name__ == "__main__":
-    print("test_values =", [random.randint(5, 25) for _ in range(3)])
-    print("test_targets =", ["Dragon", "Goblin", "Wizard", "Knight"])
     combined_spell = spell_combiner(fireball, heal)
     print(combined_spell("dragon", 42))
     base_spell = fireball
@@ -62,7 +70,6 @@ if __name__ == "__main__":
     cond_func = conditional_caster(valid_power, fireball)
     print(cond_func("wizard", 1))
     print(cond_func("wizard", -1))
-
-    spells_list = [fireball, heal]
+    spells_list: list[Callable[[str, int], str]] = [fireball, heal]
     seq_spells = spell_sequence(spells_list)
     print(seq_spells("mage", 11))

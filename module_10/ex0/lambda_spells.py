@@ -1,13 +1,13 @@
-from typing import Any
-
-
 def artifact_sorter(
         artifacts: list[dict[str, str | int]]
         ) -> list[dict[str, str | int]]:
     return sorted(artifacts, key=lambda a: a["power"], reverse=True)
 
 
-def power_filter(mages: list[dict], min_power: int) -> list[dict]:
+def power_filter(
+        mages: list[dict[str, int]],
+        min_power: int
+        ) -> list[dict[str, int]]:
     return list(filter(lambda m: m["power"] >= min_power, mages))
 
 
@@ -15,8 +15,8 @@ def spell_transformer(spells: list[str]) -> list[str]:
     return list(map(lambda s: f"* {s} *", spells))
 
 
-def mage_stats(mages: list[dict]) -> dict:
-    value: dict = {}
+def mage_stats(mages: list[dict[str, int]]) -> dict[str, int]:
+    value: dict[str, int] = {}
     max_power_mage = max(mages, key=lambda m: m["power"])
     value["max_power"] = max_power_mage["power"]
     return value
