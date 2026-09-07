@@ -3,6 +3,7 @@ from collections.abc import Callable
 
 def mage_counter() -> Callable[[], int]:
     total_calls = 0
+
     def func_counter() -> int:
         nonlocal total_calls
         total_calls += 1
