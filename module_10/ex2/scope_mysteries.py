@@ -26,37 +26,39 @@ def enchantment_factory(enchantment_type: str) -> Callable[[str], str]:
 
 
 def memory_vault() -> dict[str, Callable]:
-    vault: dict[str, int] = {}
-    def store(key: str, value: int):
+    vault: dict = {}
+
+    def store(key: str, value: object) -> None:
         vault[key] = value
-    def recall(key: str) -> int:
-        return vault[key]
+
+    def recall(key: str) -> object:
+        return vault.get(key, "Memory not found")
+
     return {"store": store, "recall": recall}
 
 
 if __name__ == "__main__":
-    func1 = mage_counter()
-    func2 = mage_counter()
+    print("===== Mage counter =====")
+    counter_a = mage_counter()
+    counter_b = mage_counter()
+    print(f"counter_a call 1: {counter_a()}")
+    print(f"counter_a call 2: {counter_a()}")
+    print(f"counter_b call 1: {counter_b()}")
 
-    print(f"Function 1 called: {func1()}")
-    print(f"Function 2 called: {func2()}")
-    print(f"Function 2 called: {func2()}")
-    print(f"Function 1 called: {func1()}")
+    print("\n===== Spell accumulator =====")
+    acc = spell_accumulator(100)
+    print(f"Base 100, add 20: {acc(20)}")
+    print(f"Base 100, add 30: {acc(30)}")
 
-    func1 = spell_accumulator(20)
-    func2 = spell_accumulator(20)
+    print("\n===== Enchantment factory =====")
+    flaming = enchantment_factory("Flaming")
+    frozen = enchantment_factory("Frozen")
+    print(flaming("Sword"))
+    print(frozen("Shield"))
 
-    print(f"Function 1 called: {func1(1)}")
-    print(f"Function 2 called: {func2(1)}")
-    print(f"Function 2 called: {func2(10)}")
-    print(f"Function 1 called: {func1(10)}")
-
-    ench = enchantment_factory("flaming")
-    data = ench("sword")
-    print(data)
-
+    print("\n===== Memory vault =====")
     vault = memory_vault()
-    store_func = vault["store"]
-    store_func("secret", 42)
-    recall_func = vault["recall"]
-    print(f"{recall_func('secret')}")
+    print("Store 'secret' = 42")
+    vault["store"]("secret", 42)
+    print(f"Recall 'secret': {vault['recall']('secret')}")
+    print(f"Recall 'unknown': {vault['recall']('unknown')}")

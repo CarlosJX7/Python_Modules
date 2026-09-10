@@ -1,5 +1,5 @@
 from functools import wraps
-from typing import Callable
+from collections.abc import Callable
 import time
 
 
@@ -10,7 +10,7 @@ def spell_timer(func: Callable)-> Callable:
         print(f"Casting {func.__name__} ...")
         result = func(*args, **kwargs)
         elapsed_time = time.time() - start
-        print(f"Spell completed in {elapsed_time: .3f} seconds")
+        print(f"Spell completed in {elapsed_time:.3f} seconds")
         return result
     return wrapper
 
@@ -52,15 +52,14 @@ def retry_spell(max_attempts: int)-> Callable:
     return decorator
 
 
-class MagueGuild:
+class MageGuild:
     @staticmethod
     def validate_mage_name(name: str) -> bool:
-        name_check =  len(name) >= 3
-        char_check = True
-        for char in name:
-            if not char.isalpha() or not char.isspace():
-                char_check = False
-        return name_check and char_check
+        if len(name) < 3:
+            return False
+        is_valid_char = lambda c: c.isalpha() or c.isspace()
+        char_validity = map(is_valid_char, name)
+        return all(char_validity)
 
 
     @power_validator(10)
@@ -80,5 +79,24 @@ def unstable_spell() -> str:
     raise RuntimeError("failed")
 
 if __name__ == "__main__":
+    print("===== Spell timer =====")
     print(fireball())
+
+    print("\n===== Retry spell =====")
     print(unstable_spell())
+
+    print("\n===== Waaaagh spelled! =====")
+
+    @retry_spell(3)
+    @spell_timer
+    def waaagh() -> str:
+        return "Waaaaaaagh spelled !"
+
+    print(waaagh())
+
+    print("\n===== MageGuild =====")
+    guild = MageGuild()
+    print(MageGuild.validate_mage_name("Gandalf"))
+    print(MageGuild.validate_mage_name("X"))
+    print(guild.cast_spell("Lightning", 15))
+    print(guild.cast_spell("Lightning", 5))

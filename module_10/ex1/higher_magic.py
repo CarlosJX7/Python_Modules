@@ -9,10 +9,8 @@ def heal(target: str, power: int) -> str:
     return f"Heal restores {target} for {power} HP"
 
 
-def valid_power(power: int) -> bool:
-    if power > 0:
-        return True
-    return False
+def valid_power(target: str, power: int) -> bool:
+    return power > 0
 
 
 def spell_combiner(
@@ -37,15 +35,13 @@ def power_amplifier(
 
 
 def conditional_caster(
-        condition: Callable[[int], bool],
+        condition: Callable[[str, int], bool],
         spell: Callable[[str, int], str]
         ) -> Callable[[str, int], str]:
     def conditional(target: str, power: int) -> str:
-        status = condition(power)
-        if status:
+        if condition(target, power):
             return spell(target, power)
-        else:
-            return "Spell fizzled"
+        return "Spell fizzled"
     return conditional
 
 
@@ -61,15 +57,28 @@ def spell_sequence(
 
 
 if __name__ == "__main__":
+    print("===== Spell combiner =====")
     combined_spell = spell_combiner(fireball, heal)
-    print(combined_spell("dragon", 42))
-    base_spell = fireball
-    multiplied_spell = power_amplifier(base_spell, 10)
-    print(base_spell("goblin", 2))
-    print(multiplied_spell("goblin", 2))
-    cond_func = conditional_caster(valid_power, fireball)
-    print(cond_func("wizard", 1))
-    print(cond_func("wizard", -1))
+    result = combined_spell("Dragon", 42)
+    print(f"Combined spell result: {result[0]}, {result[1]}")
+
+    print("\n===== Power amplifier =====")
+    mega_fireball = power_amplifier(fireball, 3)
+    print(f"Original  : {fireball('goblin', 10)}")
+    print(f"Amplified : {mega_fireball('goblin', 10)}")
+
+    print("\n===== Conditional caster =====")
+    cond_spell = conditional_caster(valid_power, fireball)
+    print(cond_spell("wizard", 15))
+    print(cond_spell("wizard", -5))
+
+    print("\n===== Spell sequence =====")
     spells_list: list[Callable[[str, int], str]] = [fireball, heal]
     seq_spells = spell_sequence(spells_list)
     print(seq_spells("mage", 11))
+
+    print("\n===== callable() demo =====")
+    print(f"fireball is callable  : {callable(fireball)}")
+    print(f"heal is callable      : {callable(heal)}")
+    print(f"42 is callable        : {callable(42)}")
+    print(f"combined_spell is callable: {callable(combined_spell)}")

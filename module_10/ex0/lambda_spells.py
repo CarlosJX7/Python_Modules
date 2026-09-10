@@ -15,15 +15,19 @@ def spell_transformer(spells: list[str]) -> list[str]:
     return list(map(lambda s: f"* {s} *", spells))
 
 
-def mage_stats(mages: list[dict[str, int]]) -> dict[str, int]:
-    value: dict[str, int] = {}
-    max_power_mage = max(mages, key=lambda m: m["power"])
-    value["max_power"] = max_power_mage["power"]
+def mage_stats(mages: list[dict[str, int | float]]) -> dict[str, int | float]:
+    value: dict[str, int | float] = {}
+    value["max_power"] = max(mages, key=lambda m: m["power"])["power"]
+    value["min_power"] = min(mages, key=lambda m: m["power"])["power"]
+    value["avg_power"] = round(
+        sum(map(lambda m: m["power"], mages)) / len(mages), 2
+    )
     return value
 
 
 if __name__ == "__main__":
     from data_generator import FuncMageDataGenerator
+
     artifacts = FuncMageDataGenerator.generate_artifacts(4)
     s_artifacts = artifact_sorter(artifacts)
     print("===== Sorting artifacts ======")
@@ -33,8 +37,20 @@ if __name__ == "__main__":
     print("\nAFTER:")
     for a in s_artifacts:
         print(f"{a['name']: <15} | {a['power']}")
+
     print("\n===== Filtering mages =====")
     mages = FuncMageDataGenerator.generate_mages(4)
     f_mages = power_filter(mages, 100)
     for m in f_mages:
         print(f"{m['name']: <15} | {m['power']}")
+
+    print("\n===== Spell transformer =====")
+    spells = FuncMageDataGenerator.generate_spells(3)
+    transformed = spell_transformer(spells)
+    print(" ".join(transformed))
+
+    print("\n===== Mage stats =====")
+    stats = mage_stats(mages)
+    print(f"Max power : {stats['max_power']}")
+    print(f"Min power : {stats['min_power']}")
+    print(f"Avg power : {stats['avg_power']}")
