@@ -14,6 +14,7 @@ def spell_timer(func: Callable)-> Callable:
         return result
     return wrapper
 
+
 def power_validator(min_power: int)-> Callable:
     def decorator(func: Callable) -> Callable:
         @wraps(func)
@@ -35,7 +36,37 @@ def power_validator(min_power: int)-> Callable:
 
 
 def retry_spell(max_attempts: int)-> Callable:
-    pass
+    def decorator(func: Callable) -> Callable:
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            for attempt in range(1, max_attempts + 1):
+                try:
+                    result = func(*args, **kwargs)
+                    return result
+                except Exception:
+                    if attempt < max_attempts:
+                         print(
+                            f"Spell failed, retrying... (attempt {attempt}/{max_attempts})")
+            return f"Spell casting failed after {max_attempts} attempts"
+        return wrapper
+    return decorator
+
+
+class MagueGuild:
+    @staticmethod
+    def validate_mage_name(name: str) -> bool:
+        name_check =  len(name) >= 3
+        char_check = True
+        for char in name:
+            if not char.isalpha() or not char.isspace():
+                char_check = False
+        return name_check and char_check
+
+
+    @power_validator(10)
+    def cast_spell(self, spell_name: str, power: int) -> str:
+        return f"Successfully cast {spell_name} with {power} power"
+
 
 
 @spell_timer
@@ -43,5 +74,11 @@ def fireball() -> str:
     time.sleep(0.1)
     return "Fireball!"
 
+
+@retry_spell(3)
+def unstable_spell() -> str:
+    raise RuntimeError("failed")
+
 if __name__ == "__main__":
     print(fireball())
+    print(unstable_spell())
