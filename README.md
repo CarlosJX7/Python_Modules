@@ -1,124 +1,72 @@
 # Python Modules
 
-Welcome to the **Python Modules** repository. This project is a comprehensive collection of Python exercises structured into several modules. It is designed to practice and master different concepts of Python programming, from the basics to advanced Object-Oriented Programming (OOP), error handling, and package management.
+Welcome to the **Python Modules** repository — a comprehensive collection of Python exercises structured into modules, designed to practice and master different concepts of the language, from the basics to advanced OOP, functional programming, error handling, and package management.
 
-## 📁 Repository Structure
+## 📦 Module Contents
 
-### Module 00: Basics (Garden Theme)
-**Description:** An introduction to Python fundamentals using a garden-themed set of exercises.  
-**What you learn:** Basic syntax, variables, standard data types, simple arithmetic operations, control flow, loops, and the difference between iterative and recursive functions.  
-**Utility:** Establishes the foundational knowledge required to write functional Python scripts and understand the core mechanics of the language.
-
-- `ex0`: `ft_hello_garden.py`
-- `ex1`: `ft_garden_name.py`
-- `ex2`: `ft_plot_area.py`
-- `ex3`: `ft_harvest_total.py`
-- `ex4`: `ft_plant_age.py`
-- `ex5`: `ft_water_reminder.py`
-- `ex6`: `ft_count_harvest_iterative.py`, `ft_count_harvest_recursive.py`
-- `ex7`: `ft_seed_inventory.py`
-
-### Module 01: Object-Oriented Programming Introduction
-**Description:** A deep dive into the paradigm of Object-Oriented Programming (OOP) in Python.  
-**What you learn:** Classes, objects, instantiation, methods, instance and class attributes, and basic encapsulation.  
-**Utility:** Enables the creation of modular, organized code that models real-world entities, making large codebases easier to maintain and scale.
-
-- `ex0`: `ft_garden_intro.py`
-- `ex1`: `ft_garden_data.py`
-- `ex2`: `ft_plant_growth.py`
-- `ex3`: `ft_plant_factory.py`
-- `ex4`: `ft_garden_security.py`
-- `ex5`: `ft_plant_types.py`
-- `ex6`: `ft_garden_analytics.py`
-
-### Module 02: Exceptions and Error Handling
-**Description:** Focuses on making scripts robust and preventing unexpected crashes.  
-**What you learn:** Using `try`, `except`, `raise`, `finally` blocks, and creating custom exception classes to handle edge cases gracefully.  
-**Utility:** Essential for developing resilient applications that can handle bad input, network failures, or missing files without breaking.
-
-- `ex0`: `ft_first_exception.py`
-- `ex1`: `ft_raise_exception.py`
-- `ex2`: `ft_different_errors.py`
-- `ex3`: `ft_custom_errors.py`
-- `ex4`: `ft_finally_block.py`
-
-### Module 03: System and Data Streams
-**Description:** Teaches how to interact with the environment and process linear streams of data.  
-**What you learn:** Command-line argument parsing, basic I/O operations, coordinating multiple data inputs, and tracking states like scores and inventories.  
-**Utility:** Provides the necessary skills to build command-line tools and interact seamlessly with system resources and user inputs.
-
-- `ex0`: `ft_command_quest.py`
-- `ex1`: `ft_score_analytics.py`
-- `ex2`: `ft_coordinate_system.py`
-- `ex3`: `ft_achievement_tracker.py`
-- `ex4`: `ft_inventory_system.py`
-- `ex5`: `ft_data_stream.py`
-- `ex6`: `ft_data_alchemist.py`
-
-### Module 04: Archives and Vault Security
-**Description:** Exercises focused on file management and data persistence.  
-**What you learn:** Reading and writing files, creating archives, managing data streams over time, and basic security concepts for safe data storage.  
-**Utility:** Crucial for applications that need to save user state, logs, or any information that must persist beyond a single session.
-
-- `ex0`: `ft_ancient_text.py`
-- `ex1`: `ft_archive_creation.py`
-- `ex2`: `ft_stream_management.py`
-- `ex3`: `ft_vault_security.py`
-
-### Module 05: Data Processing Pipelines
-**Description:** Introduces the concept of data engineering on a micro scale.  
-**What you learn:** Processing large chunks of data sequentially, filtering, transforming data, and building functional pipelines.  
-**Utility:** Highly useful for data science, ETL (Extract, Transform, Load) tasks, and processing logs efficiently.
-
-- `ex0`: `data_processor.py`
-- `ex1`: `data_stream.py`
-- `ex2`: `data_pipeline.py`
-
-### Module 06: Alchemy (Modules and Packages)
-**Description:** Covers the structure and organization of professional Python codebases.  
-**What you learn:** Creating Python packages, using `__init__.py`, organizing sub-packages, and importing internal/external modules securely.  
-**Utility:** Teaches how to structure large applications into reusable components, which is standard practice in real-world software engineering.
-
-- `alchemy/`: A package simulating alchemy with elements, potions, and grimoires.
-  - `grimoire/`: Sub-package containing light and dark spellbooks and validators.
-  - `transmutation/`: Sub-package containing recipes.
-- `elements.py`
-- **Alembic Scripts**: `ft_alembic_0.py` to `ft_alembic_5.py`
-- **Distillation Scripts**: `ft_distillation_0.py`, `ft_distillation_1.py`
-- **Kaboom Scripts**: `ft_kaboom_0.py`, `ft_kaboom_1.py`
-- **Transmutation Scripts**: `ft_transmutation_0.py`, `ft_transmutation_1.py`, `ft_transmutation_2.py`
-
-### Module 07: Advanced OOP and Battle System
-**Description:** Applies advanced OOP concepts through the creation of a modular battle and tournament simulation.  
-**What you learn:** Abstract base classes, inheritance, polymorphism, factory design pattern, composition, capability mixins/interfaces, and strategy patterns for dynamic behaviors and combat rules.  
-**Utility:** Builds architectural thinking skills required for designing scalable, maintainable systems such as game engines, simulation tools, UI frameworks, or backend business logic.
-
-- **Simulation Runners**:
-  - `battle.py`: Basic battle and creature factory demonstration (`FlameFactory`, `AquaFactory`).
-  - `capacitor.py`: Capability and evolution tests (healing and transformation mechanics).
-  - `tournament.py`: Strategy-driven tournament engine with error handling for invalid moves.
-- **Packages & Modules**:
-  - `ex0`: Base creature hierarchy and abstract creature factories (`creature.py`, `creature_factory.py`, `aqua_family.py`, `flame_family.py`).
-  - `ex1`: Capability interfaces, healing capabilities, and dynamic transformation behaviors (`capabilities.py`, `healing_family.py`, `transform_family.py`).
-  - `ex2`: Pluggable battle strategies (normal, aggressive, defensive) and custom strategy error handling (`strategies.py`).
-
-### Module 08: Environments, Packages, and Configuration (Matrix Theme)
-**Description:** Focuses on Python development environments, dependency management, package managers, and secure configuration handling using a Matrix-inspired theme.  
-**What you learn:** Virtual environment detection and isolation (`sys.prefix`, `site`), dependency declaration and management (`requirements.txt`, `pyproject.toml` with Poetry), third-party data processing & visualization libraries (`pandas`, `numpy`, `matplotlib`), and secure environment variable handling with `python-dotenv`.  
-**Utility:** Fundamental for professional software development, reproducibility across machines, securing sensitive credentials, and cleanly managing project dependencies.
-
-- `ex0`: `construct.py` - Virtual environment detector and isolation validator.
-- `ex1`: `loading.py`, `requirements.txt`, `pyproject.toml` - Runtime dependency inspection, synthetic data generation with NumPy/Pandas, and histogram plotting with Matplotlib (`matrix_analysis.png`).
-- `ex2`: `oracle.py`, `.env.example`, `.gitignore`, `requirements.txt` - Environment configuration loader (`python-dotenv`), sensitive value masking, and environment security validation.
+| M. | Topic | Exercises | Key Concepts |
+| :----: | ------ | --------- | ------------ |
+| [00](module_00)<br><sub>*Python fundamentals with a garden theme*</sub> | 🌱 **Basics** | [ex0](module_00/ex0/ft_hello_garden.py) · [ex1](module_00/ex1/ft_garden_name.py) · [ex2](module_00/ex2/ft_plot_area.py) · [ex3](module_00/ex3/ft_harvest_total.py) | `print()` · `input()` · type casting · string formatting |
+|  |  | [ex4](module_00/ex4/ft_plant_age.py) · [ex5](module_00/ex5/ft_water_reminder.py) · [ex6](module_00/ex6/ft_count_harvest_iterative.py) · [ex7](module_00/ex7/ft_seed_inventory.py) | `if`/`elif`/`else` · `for`/`while` · iterative vs recursive logic |
+| [01](module_01)<br><sub>*Modeling real-world entities with OOP*</sub> | 🏗️ **OOP** | [ex0](module_01/ex0/ft_garden_intro.py) · [ex1](module_01/ex1/ft_garden_data.py) · [ex2](module_01/ex2/ft_plant_growth.py) · [ex3](module_01/ex3/ft_plant_factory.py) · [ex4](module_01/ex4/ft_garden_security.py) | classes · `__init__` · instance vs class attributes · encapsulation |
+|  |  | [ex5](module_01/ex5/ft_plant_types.py) · [ex6](module_01/ex6/ft_garden_analytics.py) | inheritance · `super()` · `@staticmethod` · `@classmethod` |
+| [02](module_02)<br><sub>*Building resilient, crash-proof scripts*</sub> | 🛡️ **Error Handling** | [ex0](module_02/ex0/ft_first_exception.py) · [ex1](module_02/ex1/ft_raise_exception.py) · [ex2](module_02/ex2/ft_different_errors.py) | `try`/`except`/`else` · `raise` · `TypeError` · `ValueError` · `KeyError` |
+|  |  | [ex3](module_02/ex3/ft_custom_errors.py) · [ex4](module_02/ex4/ft_finally_block.py) | custom exception classes · `finally` · exception chaining |
+| [03](module_03)<br><sub>*CLI tools, collections, generators & comprehensions*</sub> | 📊 **Data Structures** | [ex0](module_03/ex0/ft_command_quest.py) | `sys.argv` · `argparse` · CLI argument parsing |
+|  |  | [ex1](module_03/ex1/ft_score_analytics.py) · [ex2](module_03/ex2/ft_coordinate_system.py) · [ex3](module_03/ex3/ft_achievement_tracker.py) · [ex4](module_03/ex4/ft_inventory_system.py) | `list` · `tuple` · `set` · `dict` · mutability & ordering |
+|  |  | [ex5](module_03/ex5/ft_data_stream.py) | generators · `yield` · lazy evaluation · `next()` |
+|  |  | [ex6](module_03/ex6/ft_data_alchemist.py) | list/dict/set comprehensions · conditional expressions |
+| [04](module_04)<br><sub>*Persisting data safely with files & context managers*</sub> | 📂 **File I/O** | [ex0](module_04/ex0/ft_ancient_text.py) · [ex1](module_04/ex1/ft_archive_creation.py) · [ex2](module_04/ex2/ft_stream_management.py) | `open()` · `read()` · `write()` · file modes (`r`, `w`, `a`) |
+|  |  | [ex3](module_04/ex3/ft_vault_security.py) | `with` statement · context managers · `__enter__`/`__exit__` |
+| [05](module_05)<br><sub>*ETL-style pipelines via abstract & polymorphic components*</sub> | 🔄 **Pipelines** | [ex0](module_05/ex0/data_processor.py) · [ex1](module_05/ex1/data_stream.py) · [ex2](module_05/ex2/data_pipeline.py) | `ABC` · `@abstractmethod` · polymorphism · method overriding · duck typing |
+| [06](module_06)<br><sub>*Structuring codebases with packages & imports*</sub> | ⚗️ **Packages** | [al0](module_06/ft_alembic_0.py) · [al1](module_06/ft_alembic_1.py) · [al2](module_06/ft_alembic_2.py) · [al3](module_06/ft_alembic_3.py) · [al4](module_06/ft_alembic_4.py) · [al5](module_06/ft_alembic_5.py) | import mechanics · `__init__.py` · relative vs absolute imports |
+|  |  | [di0](module_06/ft_distillation_0.py) · [di1](module_06/ft_distillation_1.py) · [tr0](module_06/ft_transmutation_0.py) · [tr1](module_06/ft_transmutation_1.py) · [tr2](module_06/ft_transmutation_2.py) | `from x import y` · `import as` · module aliasing · `__all__` |
+|  |  | [kb0](module_06/ft_kaboom_0.py) · [kb1](module_06/ft_kaboom_1.py) | circular imports · `ImportError` · import order & side effects |
+| [07](module_07)<br><sub>*Advanced OOP via a battle & tournament simulation*</sub> | ⚔️ **Design Patterns** | [ex0](module_07/battle.py) · [ex1](module_07/capacitor.py) · [ex2](module_07/tournament.py) | factory pattern · abstract interfaces · strategy pattern · capability mixins |
+| [08](module_08)<br><sub>*The professional Python toolchain — Matrix theme*</sub> | 🧰 **Toolchain** | [ex0](module_08/ex0/construct.py) | `venv` · `sys.prefix` · `site-packages` · environment isolation |
+|  |  | [ex1](module_08/ex1/loading.py) | `pip` · `poetry` · `requirements.txt` · `pyproject.toml` · `pandas` · `numpy` · `matplotlib` |
+|  |  | [ex2](module_08/ex2/oracle.py) | `python-dotenv` · `.env` files · secrets management · config validation |
+| [09](module_09)<br><sub>*Declarative data modeling & runtime validation — Space theme*</sub> | 🚀 **Pydantic** | [ex0](module_09/ex0/space_station.py) · [ex1](module_09/ex1/alien_contact.py) · [ex2](module_09/ex2/space_crew.py) | `BaseModel` · `Field` · type coercion · `@validator` · `model_validator` · runtime safety |
+| [10](module_10)<br><sub>*The functional side of Python*</sub> | 🧙 **Functional** | [ex0](module_10/ex0/lambda_spells.py) | `lambda` · anonymous functions · inline expressions |
+|  |  | [ex1](module_10/ex1/higher_magic.py) | `map()` · `filter()` · `sorted()` · `key=` · higher-order functions |
+|  |  | [ex2](module_10/ex2/scope_mysteries.py) | LEGB scope · closures · `nonlocal` · mutable state in closures |
+|  |  | [ex3](module_10/ex3/functools_artifacts.py) | `reduce` · `partial` · `lru_cache` · `singledispatch` · memoization |
+|  |  | [ex4](module_10/ex4/decorator_mastery.py) | decorators · decorator factories · `functools.wraps` · `*args/**kwargs` preservation |
 
 ## 🚀 Getting Started
 
-Clone the repository and explore each module's directory. Each module contains specific exercises that build upon each other.
+Clone the repository to explore and run the exercises locally:
 
 ```bash
 git clone https://github.com/CarlosJX7/Python_Modules.git
 cd Python_Modules
 ```
 
+## 🔍 Code Quality & Standards
+
+All exercises strictly adhere to **42 School** standards, ensuring clean architecture, PEP 8 compliance, and robust type safety:
+
+- **`flake8`** — Linter enforcing PEP 8 style guides and identifying common code issues.
+- **`mypy` (`--strict`)** — Static type analyzer ensuring comprehensive type annotation coverage.
+
+### Installation
+
+```bash
+python3 -m pip install flake8 mypy
+```
+
+### Running Checks
+
+Execute the checks within any module or exercise directory:
+
+```bash
+# Style & syntax check
+python3 -m flake8
+
+# Strict static type verification
+python3 -m mypy --strict .
+```
+
 ---
-*Note: Make sure you have a working Python environment (version 3.x recommended) to run the scripts.*
+
+> 💡 **Requirement:** A Python 3.10+ environment is recommended to run and test all modules.
