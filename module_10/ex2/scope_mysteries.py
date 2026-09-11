@@ -10,8 +10,10 @@ def mage_counter() -> Callable[[], int]:
         return total_calls
     return func_counter
 
-def spell_accumulator(initial_power: int)-> Callable[[int], int]:
+
+def spell_accumulator(initial_power: int) -> Callable[[int], int]:
     power = initial_power
+
     def accumulator(amount: int) -> int:
         nonlocal power
         power += amount
@@ -25,8 +27,8 @@ def enchantment_factory(enchantment_type: str) -> Callable[[str], str]:
     return add_enchantment
 
 
-def memory_vault() -> dict[str, Callable]:
-    vault: dict = {}
+def memory_vault() -> dict[str, Callable[..., object]]:
+    vault: dict[str, object] = {}
 
     def store(key: str, value: object) -> None:
         vault[key] = value

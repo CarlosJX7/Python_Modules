@@ -26,7 +26,7 @@ def mage_stats(mages: list[dict[str, int | float]]) -> dict[str, int | float]:
 
 
 if __name__ == "__main__":
-    from data_generator import FuncMageDataGenerator
+    from data_generator import FuncMageDataGenerator  # type: ignore
 
     artifacts = FuncMageDataGenerator.generate_artifacts(4)
     s_artifacts = artifact_sorter(artifacts)

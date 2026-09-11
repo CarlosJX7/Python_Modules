@@ -21,11 +21,10 @@ def spell_reducer(spells: list[int], operation: str) -> int:
             raise ValueError(f"Operation {operation} not found")
 
 
-def partial_enchanter(base_enchantment: Callable[[int, str, str], str]) -> dict[str, Callable]:
-    """ Take a base enchantment function with signature (power: int, element: str, target:
-        str)-> str
-    """
-    enchantments = {
+def partial_enchanter(
+        base_enchantment: Callable[[int, str, str], str]
+        ) -> dict[str, Callable[..., str]]:
+    enchantments: dict[str, Callable[..., str]] = {
         "fire": partial(base_enchantment, 50, "fire"),
         "ice": partial(base_enchantment, 50, "ice"),
         "water": partial(base_enchantment, 50, "water")
@@ -35,26 +34,6 @@ def partial_enchanter(base_enchantment: Callable[[int, str, str], str]) -> dict[
 
 @lru_cache(maxsize=None)
 def memoized_fibonacci(n: int) -> int:
-    """
-    @lru_cache(maxsize=None) guarda (memoiza) resultados de una función según
-    los argumentos con los que fue llamada.
-
-    Regla general:
-    - Primera vez con ciertos argumentos: la función se ejecuta y el resultado
-    se almacena en caché.
-    - Siguientes veces con esos mismos argumentos: se devuelve el resultado
-    almacenado, sin volver a ejecutar el cuerpo de la función.
-
-    Beneficio:
-    - Evita cálculos repetidos y mejora el rendimiento en llamadas frecuentes
-    con entradas iguales.
-
-    Notas:
-    - Si los argumentos cambian, se calcula de nuevo.
-    - Los argumentos deben ser hashables.
-    - cache_info() muestra estadísticas de uso de caché.
-    - cache_clear() limpia la caché.
-    """
     if n < 0:
         raise ValueError("n must be >= 0")
     if n < 2:
@@ -63,19 +42,6 @@ def memoized_fibonacci(n: int) -> int:
 
 
 def spell_dispatcher() -> Callable[[Any], str]:
-    """
-    `singledispatch` works like a type-based switch/case.
-
-    - The function decorated with `@singledispatch` is the generic entry point
-    and acts as the default/fallback case.
-    - `@<dispatcher>.register` adds specialized handlers for concrete types
-    (e.g., int, str, list).
-    - At call time, the dispatcher inspects the first argument's runtime type
-    and routes execution to the best matching registered handler.
-    - You can register multiple handlers for one dispatcher.
-    - Dispatcher names are not special (`dispatch_spell`, `cast`, etc.):
-    it is just the function name bound to the singledispatch object.
-    """
     @singledispatch
     def dispatcher(spell: Any) -> str:
         return "Unknown spell type"
@@ -89,10 +55,11 @@ def spell_dispatcher() -> Callable[[Any], str]:
         return f"[str] Enchantment {spell}"
 
     @dispatcher.register(list)
-    def _(spell: list) -> str:
+    def _(spell: list[Any]) -> str:
         return f"[list] Multicast: {len(spell)} spells"
 
     return dispatcher
+
 
 def base_enchantment(power: int, element: str, target: str) -> str:
     return f"Element: {element} with {power} and targeting ---> {target} <---"

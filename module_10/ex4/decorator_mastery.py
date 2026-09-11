@@ -1,11 +1,12 @@
 from functools import wraps
 from collections.abc import Callable
 import time
+from typing import Any
 
 
-def spell_timer(func: Callable)-> Callable:
+def spell_timer(func: Callable[..., Any]) -> Callable[..., Any]:
     @wraps(func)
-    def wrapper(*args, **kwargs):
+    def wrapper(*args: Any, **kwargs: Any) -> Any:
         start = time.time()
         print(f"Casting {func.__name__} ...")
         result = func(*args, **kwargs)
@@ -15,10 +16,12 @@ def spell_timer(func: Callable)-> Callable:
     return wrapper
 
 
-def power_validator(min_power: int)-> Callable:
-    def decorator(func: Callable) -> Callable:
+def power_validator(
+    min_power: int,
+) -> Callable[[Callable[..., Any]], Callable[..., Any]]:
+    def decorator(func: Callable[..., Any]) -> Callable[..., Any]:
         @wraps(func)
-        def wrapper(*args, **kwargs):
+        def wrapper(*args: Any, **kwargs: Any) -> Any:
             power = kwargs.get("power")
             if power is None:
                 if len(args) >= 3:
@@ -34,19 +37,22 @@ def power_validator(min_power: int)-> Callable:
     return decorator
 
 
-
-def retry_spell(max_attempts: int)-> Callable:
-    def decorator(func: Callable) -> Callable:
+def retry_spell(
+    max_attempts: int,
+) -> Callable[[Callable[..., Any]], Callable[..., Any]]:
+    def decorator(func: Callable[..., Any]) -> Callable[..., Any]:
         @wraps(func)
-        def wrapper(*args, **kwargs):
+        def wrapper(*args: Any, **kwargs: Any) -> Any:
             for attempt in range(1, max_attempts + 1):
                 try:
                     result = func(*args, **kwargs)
                     return result
                 except Exception:
                     if attempt < max_attempts:
-                         print(
-                            f"Spell failed, retrying... (attempt {attempt}/{max_attempts})")
+                        print(
+                            f"Spell failed, retrying... "
+                            f"(attempt {attempt}/{max_attempts})"
+                            )
             return f"Spell casting failed after {max_attempts} attempts"
         return wrapper
     return decorator
@@ -57,15 +63,16 @@ class MageGuild:
     def validate_mage_name(name: str) -> bool:
         if len(name) < 3:
             return False
-        is_valid_char = lambda c: c.isalpha() or c.isspace()
+
+        def is_valid_char(c: str) -> bool:
+            return c.isalpha() or c.isspace()
+
         char_validity = map(is_valid_char, name)
         return all(char_validity)
-
 
     @power_validator(10)
     def cast_spell(self, spell_name: str, power: int) -> str:
         return f"Successfully cast {spell_name} with {power} power"
-
 
 
 @spell_timer
@@ -77,6 +84,7 @@ def fireball() -> str:
 @retry_spell(3)
 def unstable_spell() -> str:
     raise RuntimeError("failed")
+
 
 if __name__ == "__main__":
     print("===== Spell timer =====")
